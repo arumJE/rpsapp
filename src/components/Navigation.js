@@ -36,8 +36,6 @@ class Navigation extends Component {
     //     loading: false
     //   });
     // }
-
-    console.log(this.props.authenticated);
   }
 
   openModal() {
