@@ -20,7 +20,8 @@ class EventsList extends Component {
     super(props);
     this.state = {
       redirect: false,
-      userEmail: ''
+      userEmail: '',
+      eventIndex: [4]
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadData = this.loadData.bind(this);
@@ -30,7 +31,7 @@ class EventsList extends Component {
     console.log(e.target.getAttribute('keyprop'));
     this.setState({ selectedEvent: e.target.getAttribute('keyprop') });
     console.log(moment().format('YYYY-MM-DD'));
-    this.getElement();
+    //this.getElement();
 
     // let startDate = moment(e.target.getAttribute('startdate')).format('YYYY-MM-DD');
     // let endDate = moment(e.target.getAttribute('enddate')).format('YYYY-MM-DD');
@@ -44,7 +45,20 @@ class EventsList extends Component {
         this.setState({redirect: true});
       }
     });
-    //this.getElement();
+    this.state.eventIndex = [];
+    this.getElement();
+    this.eventBackground();
+  }
+
+  eventBackground() {
+    let node = document.getElementsByClassName('home-col-ev');
+    for (var i = 0; i < this.state.eventIndex.length; i++) {
+      for (var j = 0; j < node.length; j++) {
+        if (this.state.eventIndex[i] == j) {
+          node[j].style.background = '#4EAFEF';
+        }
+      }
+    }
   }
 
   getElement() {
@@ -53,10 +67,15 @@ class EventsList extends Component {
       let start = node[i].attributes.startdate.nodeValue;
       let end = node[i].attributes.enddate.nodeValue;
 
+      var newArray = this.state.eventIndex;
+
       if(this.dateBetween(start, end)) {
+        newArray.push(i);
+        this.setState({eventIndex: newArray});
         console.log(i, this.dateBetween(start, end));
       }
     }
+    console.log('event array:', this.state.eventIndex);
     //const element = node();
     //console.log('there are this many items:',node);
   }
