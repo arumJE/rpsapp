@@ -99,7 +99,7 @@ class EventsList extends Component {
 
     return (
       <div className="home-page">
-        <h1 className="page-header">Live Events</h1>
+        <h1 className="page-header">All Events</h1>
         <div>
           <Button bsStyle="link" onClick={this.loadData}>Show Live Events</Button>
         </div>
