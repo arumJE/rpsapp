@@ -69,7 +69,7 @@ class EventsList extends Component {
 
       var newArray = this.state.eventIndex;
 
-      if(this.dateBetween(start, end)) {
+      if(this.dateBetween(start, end) || moment().format('YYYY-MM-DD') === start) {
         newArray.push(i);
         this.setState({eventIndex: newArray});
         console.log(i, this.dateBetween(start, end));
